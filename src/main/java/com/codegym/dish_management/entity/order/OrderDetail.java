@@ -1,6 +1,6 @@
 package com.codegym.dish_management.entity.order;
 
-import com.codegym.dish_management.entity.dish.Food;
+import com.codegym.dish_management.entity.food.Food;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

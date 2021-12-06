@@ -1,4 +1,4 @@
-package com.codegym.dish_management.entity.dish;
+package com.codegym.dish_management.entity.food;
 
 import com.codegym.dish_management.entity.order.OrderDetail;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -21,8 +20,9 @@ public class Food {
     private Integer foodId;
     private String foodName;
     private String foodImage;
+    private String foodDescription;
     private boolean deleteFlag;
-    private double fadPrice;
+    private double foodPrice;
 
     @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name = "category_id", referencedColumnName = "categoryId")
