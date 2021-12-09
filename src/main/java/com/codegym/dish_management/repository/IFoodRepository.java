@@ -45,5 +45,16 @@ public interface IFoodRepository extends JpaRepository<Food, Integer> {
                     "and (?2 is null or food_price = ?2)" +
                     "and (?3 is null or category_id = ?3)",
             nativeQuery = true)
-    Page<Food> findAllFood(Pageable pageable, @Param("name") String name, @Param("price") Double price, @Param("id") Integer id);
+    Page<Food> findAllFood(Pageable pageable,@Param("foodName") String foodName,@Param("foodPrice") Double foodPrice,@Param("categoryId") Integer categoryId);
+
+    @Query(value = "select food_id, delete_flag, food_description, food_image, food_name, food_price, category_id " +
+            "FROM food where delete_flag = false " +
+            "and (?1 is null or food_name like %?1%)" +
+            "and (?2 is null or food_price = ?2)",
+            countQuery = "select food_id, delete_flag, food_description, food_image, food_name, food_price, category_id " +
+                    "FROM food where delete_flag = false " +
+                    "and (?1 is null or food_name like %?1%)" +
+                    "and (?2 is null or food_price = ?2)",
+            nativeQuery = true)
+    Page<Food> findAllFoodNoId(Pageable pageable,@Param("foodName") String foodName,@Param("foodPrice") Double foodPrice);
 }

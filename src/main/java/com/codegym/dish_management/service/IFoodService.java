@@ -5,5 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface IFoodService {
-    Page<Food> viewAllFoodAndDrink(Pageable pageable, String name, Double price, Integer id);
+    Page<Food> viewAllFoodAndDrink(Pageable pageable, String foodName, Double foodPrice, Integer categoryId);
+
+    Page<Food> viewAllFoodAndDrinkNoId(Pageable pageable, String foodName, Double foodPrice);
 }

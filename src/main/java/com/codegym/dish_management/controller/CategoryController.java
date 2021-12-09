@@ -20,7 +20,7 @@ public class CategoryController {
     @Autowired
     private ICategoryService categoryService;
 
-    @GetMapping("/all")
+    @GetMapping("/list")
     public ResponseEntity<List<Category>> viewAllCategory(){
         List<Category> categoryList = categoryService.findAllCategory();
         if (categoryList.isEmpty()){

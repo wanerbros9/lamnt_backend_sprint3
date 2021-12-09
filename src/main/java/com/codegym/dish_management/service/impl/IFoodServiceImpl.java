@@ -15,7 +15,12 @@ public class IFoodServiceImpl implements IFoodService {
     private IFoodRepository foodRepository;
 
     @Override
-    public Page<Food> viewAllFoodAndDrink(Pageable pageable, String name, Double price, Integer id) {
-        return foodRepository.findAllFood(pageable, name, price, id);
+    public Page<Food> viewAllFoodAndDrink(Pageable pageable, String foodName, Double foodPrice, Integer categoryId) {
+        return foodRepository.findAllFood(pageable, foodName, foodPrice, categoryId);
+    }
+
+    @Override
+    public Page<Food> viewAllFoodAndDrinkNoId(Pageable pageable, String foodName, Double foodPrice) {
+        return foodRepository.findAllFoodNoId(pageable, foodName, foodPrice);
     }
 }

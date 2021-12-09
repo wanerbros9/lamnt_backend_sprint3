@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/food")
@@ -21,12 +23,22 @@ public class FoodController {
     private IFoodService foodService;
 
     @GetMapping("/list")
-    public ResponseEntity<Page<Food>> viewAllFood(@PageableDefault(value = 5, sort = "food_id", direction = Sort.Direction.ASC)
-                                                          Pageable pageable,
-                                                  @RequestParam(value = "name", required = false) String name,
-                                                  @RequestParam(value = "price", required = false) Double price,
-                                                  @RequestParam(value = "id", required = false) Integer id) {
-        Page<Food> foodList = foodService.viewAllFoodAndDrink(pageable, name, price, id);
+    public ResponseEntity<Page<Food>> viewAllFood(@PageableDefault(value = 6) Pageable pageable,
+                                                  @RequestParam(required = false) String foodName,
+                                                  @RequestParam(required = false) Double foodPrice,
+                                                  @RequestParam(required = false) Integer categoryId) {
+        Page<Food> foodList = foodService.viewAllFoodAndDrink(pageable, foodName, foodPrice, categoryId);
+        if (!foodList.isEmpty()) {
+            return new ResponseEntity<>(foodList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/list-no-id")
+    public ResponseEntity<Page<Food>> viewAllFood(@PageableDefault(value = 6) Pageable pageable,
+                                                  @RequestParam(required = false) String foodName,
+                                                  @RequestParam(required = false) Double foodPrice) {
+        Page<Food> foodList = foodService.viewAllFoodAndDrinkNoId(pageable, foodName, foodPrice);
         if (!foodList.isEmpty()) {
             return new ResponseEntity<>(foodList, HttpStatus.OK);
         }

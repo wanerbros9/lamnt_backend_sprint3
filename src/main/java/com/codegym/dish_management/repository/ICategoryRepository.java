@@ -13,6 +13,6 @@ import java.util.List;
 public interface ICategoryRepository extends JpaRepository<Category, Integer> {
 
     //findAll Category
-    @Query(value = "select  category_id, category_name from `caegory`", nativeQuery = true)
+    @Query(value = "select  category_id, category_name from `category`", nativeQuery = true)
     List<Category> findAllCategory();
 }
