@@ -45,8 +45,9 @@ public interface IFoodRepository extends JpaRepository<Food, Integer> {
                     "and (?2 is null or food_price = ?2)" +
                     "and (?3 is null or category_id = ?3)",
             nativeQuery = true)
-    Page<Food> findAllFood(Pageable pageable,@Param("foodName") String foodName,@Param("foodPrice") Double foodPrice,@Param("categoryId") Integer categoryId);
+    Page<Food> findAllFood(Pageable pageable, @Param("foodName") String foodName, @Param("foodPrice") Double foodPrice, @Param("categoryId") Integer categoryId);
 
+    //findAllNoCategory
     @Query(value = "select food_id, delete_flag, food_description, food_image, food_name, food_price, category_id " +
             "FROM food where delete_flag = false " +
             "and (?1 is null or food_name like %?1%)" +
@@ -56,5 +57,13 @@ public interface IFoodRepository extends JpaRepository<Food, Integer> {
                     "and (?1 is null or food_name like %?1%)" +
                     "and (?2 is null or food_price = ?2)",
             nativeQuery = true)
-    Page<Food> findAllFoodNoId(Pageable pageable,@Param("foodName") String foodName,@Param("foodPrice") Double foodPrice);
+    Page<Food> findAllFoodNoId(Pageable pageable, @Param("foodName") String foodName, @Param("foodPrice") Double foodPrice);
+
+    //Top 5 new food
+    @Query(value = "select food_id, delete_flag, food_description, food_image, food_name, food_price, category_id " +
+            "from `food` " +
+            "where delete_flag = 0 " +
+            "order by food_id " +
+            "desc limit 5", nativeQuery = true)
+    List<Food> topFiveNewFood();
 }

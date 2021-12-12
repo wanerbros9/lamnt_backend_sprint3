@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class IFoodServiceImpl implements IFoodService {
 
@@ -22,5 +24,10 @@ public class IFoodServiceImpl implements IFoodService {
     @Override
     public Page<Food> viewAllFoodAndDrinkNoId(Pageable pageable, String foodName, Double foodPrice) {
         return foodRepository.findAllFoodNoId(pageable, foodName, foodPrice);
+    }
+
+    @Override
+    public List<Food> topFiveNewFood() {
+        return foodRepository.topFiveNewFood();
     }
 }

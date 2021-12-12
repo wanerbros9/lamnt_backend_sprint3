@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -43,5 +44,14 @@ public class FoodController {
             return new ResponseEntity<>(foodList, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/top-five")    
+    public ResponseEntity<List<Food>> topFiveFood() {
+        List<Food> foodList = foodService.topFiveNewFood();
+        if (foodList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(foodList, HttpStatus.OK);
     }
 }
