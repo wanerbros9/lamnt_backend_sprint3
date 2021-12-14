@@ -46,12 +46,21 @@ public class FoodController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/top-five")    
+    @GetMapping("/top-five")
     public ResponseEntity<List<Food>> topFiveFood() {
         List<Food> foodList = foodService.topFiveNewFood();
         if (foodList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(foodList, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Food> detailFood(@PathVariable Integer id) {
+        Food food = foodService.detailFood(id);
+        if (food != null) {
+            return new ResponseEntity<>(food, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

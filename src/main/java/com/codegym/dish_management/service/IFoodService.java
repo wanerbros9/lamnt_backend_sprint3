@@ -12,4 +12,6 @@ public interface IFoodService {
     Page<Food> viewAllFoodAndDrinkNoId(Pageable pageable, String foodName, Double foodPrice);
 
     List<Food> topFiveNewFood();
+
+    Food detailFood(Integer fadId);
 }

@@ -30,4 +30,9 @@ public class IFoodServiceImpl implements IFoodService {
     public List<Food> topFiveNewFood() {
         return foodRepository.topFiveNewFood();
     }
+
+    @Override
+    public Food detailFood(Integer fadId) {
+        return foodRepository.detailFood(fadId);
+    }
 }

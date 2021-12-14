@@ -29,9 +29,9 @@ public interface IFoodRepository extends JpaRepository<Food, Integer> {
     void updateFood(String food_name, String food_image, Double food_price, String food_description, Integer category_id, Integer food_id);
 
     //detail food
-    @Query(value = "select food_id, delete_flag, fad_name, fad_image, fad_price, food_description, category_id from `food` where delete_Flag = false and fad_id = ?1",
+    @Query(value = "select food_id, delete_flag, food_name, food_image, food_price, food_description, category_id from `food` where delete_Flag = false and food_id = ?1",
             nativeQuery = true)
-    Food detailFood(@Param("id") Integer id);
+    Food detailFood(Integer fad_id);
 
     //findAll
     @Query(value = "select food_id, delete_flag, food_description, food_image, food_name, food_price, category_id " +
